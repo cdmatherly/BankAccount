@@ -40,4 +40,5 @@ Account_2 = BankAccount(0.045, 600)
 Account_1.deposit(200).deposit(50).deposit(100).withdraw(500).yield_interest().display_account_info()
 Account_2.deposit(300).deposit(100).withdraw(50).withdraw(75).withdraw(100).withdraw(10).display_account_info()
 
+# Grab all accounts and run display info
 BankAccount.all_balances()
