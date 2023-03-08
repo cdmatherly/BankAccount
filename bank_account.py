@@ -1,3 +1,4 @@
+#Create Bank Account class
 class BankAccount:
 
     all_accounts = []
@@ -34,6 +35,34 @@ class BankAccount:
         for account in cls.all_accounts:
             account.display_account_info()
 
+#Create User class that creates a bank account 
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.account = BankAccount(0.04, 0)
+
+    def make_deposit(self, amount):
+        self.account.deposit(amount)
+        return self
+
+    def make_withdrawal(self, amount):
+        if self.account.balance > amount:
+            self.account.balance -= amount
+            return self
+
+    
+    def display_user_balance(self):
+        print(self.account.balance)
+        return self
+
+    # ? How to specify which account is being withdrawn from?
+    # def create_account(self, account_name, int_rate, balance):
+    #     self.account = account_name
+    #     account_name = BankAccount(int_rate, balance)
+    #     return self
+
+
 Account_1 = BankAccount(0.035, 500)
 Account_2 = BankAccount(0.045, 600)
 
@@ -42,3 +71,7 @@ Account_2.deposit(300).deposit(100).withdraw(50).withdraw(75).withdraw(100).with
 
 # Grab all accounts and run display info
 BankAccount.all_balances()
+
+User_1 = User("Chase", "email@gmail.com")
+User_1.make_deposit(100)
+User_1.display_user_balance()
