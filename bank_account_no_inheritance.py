@@ -37,25 +37,32 @@ class BankAccount:
             account.display_account_info()
 
 #Create User class that creates a bank account 
-class User( BankAccount ):
-    def __init__(self, name, email):
+class User:
+    def __init__(self, name, email, type):
         self.name = name
         self.email = email
+        if type == 'checking':
+            int_rate = 0.02
+        elif type == 'savings':
+            int_rate = 0.04
+        else:
+            int_rate = 0.00
+        self.account = BankAccount(type, int_rate, balance=0)
 
-    def open_account(self, type, int_rate, balance):
-        super().__init__(type, int_rate, balance)
+    # def open_account(self, type, int_rate, balance):
+    #     super().__init__(type, int_rate, balance)
 
     def make_deposit(self, amount):
-        super().deposit(amount)
+        self.account.deposit(amount)
         return self
 
     def make_withdrawal(self, amount):
-        if self.balance > amount:
-            self.balance -= amount
+        if self.account.balance > amount:
+            self.account.balance -= amount
             return self
 
     def display_user_balance(self):
-        print(self.balance)
+        print(self.account.balance)
         return self
 
     # ? How to specify which account is being withdrawn from?
@@ -74,9 +81,9 @@ Account_2.deposit(300).deposit(100).withdraw(50).withdraw(75).withdraw(100).with
 # Grab all accounts and run display info
 BankAccount.all_balances()
 
-User_1 = User("Chase", "email@gmail.com")
-User_1.open_account("checking", 0.01, 0)
-User_1.make_deposit(100)
+User_1 = User("Chase", "email@gmail.com", 'savings')
+# User_1.open_account("checking", 0.01, 0)
+# User_1.make_deposit(100)
 User_1.display_user_balance()
 
-print(User_1)
+print(User_1.account.int_rate)
